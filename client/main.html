@@ -1,0 +1,18 @@
+<head>
+	<title>bpmn.bug</title>
+</head>
+
+<body>
+<div class="container">
+	{{> hello}}
+</div>
+</body>
+
+<template name="hello">
+	<h1>Create some Workflow</h1>
+	{{> quickForm id="bpmnForm" schema=schema type="normal" }}
+	{{#if xml}}
+		<hr>
+		<pre>{{xml}}</pre>
+	{{/if}}
+</template>
