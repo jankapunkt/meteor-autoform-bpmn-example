@@ -9,9 +9,18 @@
 </body>
 
 <template name="hello">
-	<h1>Create some Workflow</h1>
+    <h1>Create some Workflow</h1>
+
+    <div class="alert alert-dismissable alert-info">
+        <ul>
+            <li>Click the save button before submit, otherwise no data is passed to the AutoForm</li>
+            <li>The bpmn process XML will appear below the form, once submitted.</li>
+        </ul>
+    </div>
+
 	{{> quickForm id="bpmnForm" schema=schema type="normal" }}
-	{{#if xml}}
+
+    {{#if xml}}
 		<hr>
 		<pre>{{xml}}</pre>
 	{{/if}}
