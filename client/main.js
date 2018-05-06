@@ -52,7 +52,8 @@ Template.hello.helpers({
   },
   preview(id) {
     const doc = BpmnDefinitions.findOne(id);
-    return JSON.stringify(doc, null, 2);
+    //return JSON.stringify(doc, null, 2);
+    return doc.data;
   },
   isCurrent(id) {
     const current = Template.instance().current.get();
