@@ -1,18 +1,55 @@
 <head>
-	<title>bpmn.bug</title>
+    <title>AutoForm BPMN Extension Example</title>
 </head>
 
 <body>
 <div class="container">
-	{{> hello}}
+    {{> hello}}
 </div>
 </body>
 
 <template name="hello">
-	<h1>Create some Workflow</h1>
-	{{> quickForm id="bpmnForm" schema=schema type="normal" }}
-	{{#if xml}}
-		<hr>
-		<pre>{{xml}}</pre>
-	{{/if}}
+
+    <button class="btn btn-success" id="createbutton">
+        <i class="fa fa-fw fa-plus"></i> Create new
+    </button>
+
+    {{#if create}}
+        {{> quickForm id="bpmnForm" schema=schema type="normal" }}
+    {{/if}}
+    <hr>
+
+    <ul class="list-group">
+        {{#each definitions}}
+            <li class="list-group-item clearfix {{#if isCurrent}}list-group-item-info{{/if}}">
+                <button class="btn btn-sm btn-danger pull-right delete-file"
+                        data-target="{{this._id}}">
+                    <i class="fa fa-fw fa-trash"></i>
+                </button>
+                <button class="btn btn-sm btn-default pull-right toggle-preview"
+                        data-target="{{this._id}}">
+                    <i class="fa fa-fw fa-code"></i>
+                </button>
+                <button class="btn btn-sm btn-default pull-right edit-file"
+                        data-target="{{this._id}}">
+                    <i class="fa fa-fw fa-pencil"></i>
+                </button>
+
+                <span class="text-muted">{{toDate this.updatedAt}}</span>
+                <strong>{{this.title}}</strong>
+                {{#if isCurrent this._id}}
+                    <hr>
+                    {{> quickForm id="bpmnUpdateForm" schema=schema type="normal" doc=doc }}
+                {{/if}}
+
+                {{#if hasPreview this._id}}
+                    <hr>
+                    <pre>{{preview this._id}}</pre>
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+
+
+
 </template>
