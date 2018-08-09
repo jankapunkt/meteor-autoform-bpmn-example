@@ -31,6 +31,7 @@ Template.hello.onCreated(function helloOnCreated () {
   this.preview = new ReactiveVar()
   this.current = new ReactiveVar()
   this.create = new ReactiveVar()
+  this.disable = new ReactiveVar()
 })
 
 Template.hello.helpers({
@@ -68,6 +69,9 @@ Template.hello.helpers({
   },
   toDate (date) {
     return new Date(date).toLocaleString()
+  },
+  formType() {
+    return Template.instance().disable.get() ? "disabled" : "normal"
   }
 })
 
@@ -79,6 +83,7 @@ Template.hello.events({
     insertDoc.updatedAt = new Date()
     BpmnDefinitions.insert(insertDoc)
     templateInstance.create.set(false)
+    templateInstance.disable.set(false)
   },
 
   'submit #bpmnUpdateForm' (event, templateInstance) {
@@ -90,6 +95,7 @@ Template.hello.events({
     const docId = templateInstance.current.get()
     BpmnDefinitions.update(docId, { $set: updateDoc.$set })
     templateInstance.current.set(null)
+    templateInstance.disable.set(false)
   },
 
   'click .edit-file' (event, templateInstance) {
@@ -97,8 +103,15 @@ Template.hello.events({
     const target = $(event.currentTarget).attr('data-target')
     templateInstance.create.set(false)
     templateInstance.current.set(target)
+    templateInstance.disable.set(false)
   },
-
+  'click .view-file' (event, templateInstance) {
+    event.preventDefault()
+    const target = $(event.currentTarget).attr('data-target')
+    templateInstance.create.set(false)
+    templateInstance.current.set(target)
+    templateInstance.disable.set(true)
+  },
   'click .delete-file' (event, templateInstance) {
     event.preventDefault()
     const target = $(event.currentTarget).attr('data-target')
@@ -109,6 +122,8 @@ Template.hello.events({
 
       const currentPreview = templateInstance.preview.get()
       if (target === currentPreview) templateInstance.preview.set(null)
+
+      templateInstance.disable.set(false)
     }
   },
 
@@ -116,6 +131,7 @@ Template.hello.events({
     event.preventDefault()
     templateInstance.current.set(null)
     templateInstance.create.set(true)
+    templateInstance.disable.set(false)
   },
 
   'click .toggle-preview' (event, templateInstance) {
@@ -129,5 +145,6 @@ Template.hello.events({
     event.preventDefault()
     templateInstance.current.set(null)
     templateInstance.create.set(false)
+    templateInstance.disable.set(false)
   }
 })

@@ -42,7 +42,7 @@
                         <strong>{{this.title}}</strong>
                         {{#if isCurrent this._id}}
                             <hr>
-                            {{> quickForm id="bpmnUpdateForm" schema=schema type="normal" doc=doc }}
+                            {{> quickForm id="bpmnUpdateForm" schema=schema type=formType doc=doc }}
                             <button class="btn btn-default" id="cancel-button">Cancel</button>
                         {{/if}}
 
