@@ -67,7 +67,8 @@ Template.hello.helpers({
     return BpmnDefinitions.findOne(current);
   },
   definitions() {
-    return BpmnDefinitions.find();
+    const cursor = BpmnDefinitions.find();
+    return cursor.count() > 0 ? cursor : null
   },
   toDate(date) {
     return new Date(date).toLocaleString();
