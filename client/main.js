@@ -127,6 +127,12 @@ Template.hello.events({
     const target = $(event.currentTarget).attr('data-target');
     const currentPreview = templateInstance.preview.get();
     templateInstance.preview.set(currentPreview === target ? null : target);
-  }
+  },
+
+  'click #cancel-button'(event, templateInstance) {
+    event.preventDefault();
+    templateInstance.current.set(null)
+    templateInstance.create.set(false);
+  },
 });
 

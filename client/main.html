@@ -9,13 +9,12 @@
 </body>
 
 <template name="hello">
+    <h1>AutoForm BPMN Extension Example</h1>
     {{#if create}}
         {{> quickForm id="bpmnForm" schema=schema type="normal" }}
+        <button class="btn btn-default" id="cancel-button">Cancel</button>
     {{else}}
         {{#with definitions}}
-            <button class="btn btn-success btn-lg btn-block" id="createbutton">
-                <i class="fa fa-fw fa-plus"></i> Create new
-            </button>
             <ul class="list-group">
                 {{#each this}}
                     <li class="list-group-item clearfix {{#if isCurrent}}list-group-item-info{{/if}}">
@@ -37,6 +36,7 @@
                         {{#if isCurrent this._id}}
                             <hr>
                             {{> quickForm id="bpmnUpdateForm" schema=schema type="normal" doc=doc }}
+                            <button class="btn btn-default" id="cancel-button">Cancel</button>
                         {{/if}}
 
                         {{#if hasPreview this._id}}
@@ -49,10 +49,10 @@
         {{else}}
             <div class="jumbotron text-center">
                 <p>No processes yet</p>
-                <button class="btn btn-success btn-lg btn-block" id="createbutton">
-                    <i class="fa fa-fw fa-plus"></i> Create new
-                </button>
             </div>
         {{/with}}
+        <button class="btn btn-success btn-lg btn-block" id="createbutton">
+            <i class="fa fa-fw fa-plus"></i> Create new
+        </button>
     {{/if}}
 </template>
