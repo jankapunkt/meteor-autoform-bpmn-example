@@ -2,12 +2,20 @@
   "name": "bpmn.bug",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "lint": "standard",
+    "lint-fix":"standard --fix"
   },
+  "standard": {
+    "globals": [ "AutoForm" ]
+  }
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
     "bootstrap": "^3.3.7",
     "meteor-node-stubs": "^0.3.2",
     "simpl-schema": "^1.4.2"
+  },
+  "devDependencies": {
+    "standard": "*"
   }
 }
