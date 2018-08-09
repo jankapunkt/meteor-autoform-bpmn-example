@@ -1,15 +1,15 @@
-import { Mongo } from 'meteor/mongo';
+import { Mongo } from 'meteor/mongo'
 
-export const BpmnDefinitions = new Mongo.Collection('bpmnDefinitions');
+export const BpmnDefinitions = new Mongo.Collection('bpmnDefinitions')
 
 BpmnDefinitions.allow({
-  insert() {
+  insert () {
     return true
   },
-  update() {
+  update () {
     return true
   },
-  remove() {
+  remove () {
     return true
-  },
+  }
 })
